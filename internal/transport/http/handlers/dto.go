@@ -13,21 +13,29 @@ type taskMutationDTO struct {
 }
 
 type taskDTO struct {
-	ID          int64             `json:"id"`
-	Title       string            `json:"title"`
-	Description string            `json:"description"`
-	Status      taskdomain.Status `json:"status"`
-	CreatedAt   time.Time         `json:"created_at"`
-	UpdatedAt   time.Time         `json:"updated_at"`
+	ID            int64             `json:"id"`
+	Title         string            `json:"title"`
+	Description   string            `json:"description"`
+	Status        taskdomain.Status `json:"status"`
+	ScheduleID    *int64            `json:"schedule_id,omitempty"`
+	ScheduledDate *string           `json:"scheduled_date,omitempty"`
+	CreatedAt     time.Time         `json:"created_at"`
+	UpdatedAt     time.Time         `json:"updated_at"`
 }
 
 func newTaskDTO(task *taskdomain.Task) taskDTO {
-	return taskDTO{
+	dto := taskDTO{
 		ID:          task.ID,
 		Title:       task.Title,
 		Description: task.Description,
 		Status:      task.Status,
+		ScheduleID:  task.ScheduleID,
 		CreatedAt:   task.CreatedAt,
 		UpdatedAt:   task.UpdatedAt,
 	}
+	if task.ScheduledDate != nil {
+		formatted := task.ScheduledDate.Format("2006-01-02")
+		dto.ScheduledDate = &formatted
+	}
+	return dto
 }

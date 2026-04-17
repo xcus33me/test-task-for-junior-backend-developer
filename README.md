@@ -53,3 +53,9 @@ http://localhost:8080/swagger/openapi.json
 - `GET /api/v1/tasks/{id}`
 - `PUT /api/v1/tasks/{id}`
 - `DELETE /api/v1/tasks/{id}`
+- `POST /api/v1/schedules`
+- `GET /api/v1/schedules`
+- `GET /api/v1/schedules/{id}`
+- `PUT /api/v1/schedules/{id}`
+- `DELETE /api/v1/schedules/{id}`
+- `POST /api/v1/schedules/generate`
